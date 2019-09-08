@@ -51,7 +51,7 @@ expr0 = foldr ($) nonAssociativeExpr levels
             return $ Var "?" :$ [condition, trueExpr, falseExpr]
            <|>
             return condition
-      , \higher -> -- || boolean OR operator
+      , \higher -> -- (||) boolean OR operator
           chainl1 higher (do
                              op <- matchOR
                              return $ binaryOperation op)
@@ -75,11 +75,11 @@ expr0 = foldr ($) nonAssociativeExpr levels
           chainl1 higher (do
                              op <- matchCAT
                              return $ binaryOperation op)
-      , \higher -> -- ^ exponent operator. This is not available in OpenSCAD.
+      , \higher -> -- (^) exponent operator. This is not available in OpenSCAD.
           chainr1 higher (do
                              op <- matchTok '^'
                              return $ binaryOperation op)
-      , \higher -> -- *, /, % operators
+      , \higher -> -- (*), (/), (%) operators
           chainl1 higher (do
                              op <- oneOf "*/%" <* whiteSpace
                              return $ binaryOperation [op])

@@ -232,7 +232,7 @@ getContour p1@(x1, y1) p2 res@(xres,yres) obj =
             ]| y0<-pYs | y1'<-tail pYs |mX'' <-midsX | mX'T <-tail midsX | mY'' <-midsY                    | objY0 <- objV                        | objY1 <- tail objV
             ] `using` parBuffer (max 1 $ div (fromℕ $ nx+ny) forcesteps) rdeepseq
     in
-      -- | Merge squares, etc
+      -- Merge squares, etc
       cleanLoopsFromSegs . concat $ concat segs
   
 -- utility functions
